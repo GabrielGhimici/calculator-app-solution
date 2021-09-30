@@ -1,10 +1,12 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
+import ThemeSelector from './ThemeSelector';
 
 export default function Header() {
   return (
     <View style={styles.headerContainer}>
       <Text style={styles.title}>calc</Text>
+      <ThemeSelector selectedTheme={'dark'} />
     </View>
   );
 }

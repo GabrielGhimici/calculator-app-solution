@@ -13,13 +13,18 @@ export default function Keypad() {
       const isLastInLine = keyIndex === row.length - 1;
       return (
         <Key
+          key={`${keyIndex} - ${key.label}`}
           label={key.label}
           variant={key.variant}
           lastInLine={isLastInLine}
         />
       );
     });
-    return <View style={rowStyles}>{keys}</View>;
+    return (
+      <View key={`Keypad row ${rowIndex}`} style={rowStyles}>
+        {keys}
+      </View>
+    );
   });
   return <View style={styles.keypadContainer}>{keypadContent}</View>;
 }
