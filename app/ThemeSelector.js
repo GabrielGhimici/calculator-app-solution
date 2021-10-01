@@ -1,9 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, StyleSheet, Text, Pressable } from 'react-native';
+import {
+  StateContext,
+  DispatchContext,
+  updateTheme,
+} from './styles/ThemeContext';
+import { palette } from './styles/Palette';
 
-export default function ThemeSelector({ selectedTheme }) {
+export default function ThemeSelector() {
+  const { theme } = useContext(StateContext);
+  const dispatch = useContext(DispatchContext);
   const availableThemes = ['dark', 'light', 'contrast'];
-  const [theme, setTheme] = useState(selectedTheme);
   const [increment, setIncrement] = useState(1);
 
   const toggleTheme = () => {
@@ -16,26 +23,37 @@ export default function ThemeSelector({ selectedTheme }) {
     } else if (newIndex === 0) {
       setIncrement(1);
     }
-    setTheme(availableThemes[newIndex]);
+    dispatch(updateTheme(availableThemes[newIndex]));
   };
 
-  const toggleStyles = [styles.toggleBackground, styles[theme]];
+  const toggleStyles = [
+    styles.toggleBackground,
+    styles[`${theme}Position`],
+    styles[`${theme}ToggleBackground`],
+  ];
+
+  const toggleLabels = availableThemes.map((availableTheme, index) => {
+    return (
+      <Text
+        key={`${availableTheme} - ${index}`}
+        style={[styles.label, styles.themeLabel, styles[`${theme}LabelColor`]]}
+      >
+        {index + 1}
+      </Text>
+    );
+  });
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>THEME</Text>
+      <Text style={[styles.label, styles[`${theme}LabelColor`]]}>THEME</Text>
       <Pressable
         android_disableSound={true}
         style={styles.selector}
         onPress={toggleTheme}
       >
-        <View style={styles.themeLabels}>
-          <Text style={[styles.label, styles.themeLabel]}>1</Text>
-          <Text style={[styles.label, styles.themeLabel]}>2</Text>
-          <Text style={[styles.label, styles.themeLabel]}>3</Text>
-        </View>
+        <View style={styles.themeLabels}>{toggleLabels}</View>
         <View style={toggleStyles}>
-          <View style={styles.thumb}></View>
+          <View style={[styles.thumb, styles[`${theme}Thumb`]]}></View>
         </View>
       </Pressable>
     </View>
@@ -59,35 +77,58 @@ const styles = StyleSheet.create({
   },
   label: {
     fontFamily: 'Spartan_700Bold',
-    color: 'hsl(0, 0%, 100%)',
     fontSize: 12,
     padding: 6,
+  },
+  darkLabelColor: {
+    color: palette.dark.text.light,
+  },
+  lightLabelColor: {
+    color: palette.light.text.dark,
+  },
+  contrastLabelColor: {
+    color: palette.contrast.text.accent,
   },
   themeLabel: {
     width: 28,
     textAlign: 'center',
   },
   toggleBackground: {
-    backgroundColor: 'hsl(223, 31%, 20%)',
-    borderColor: 'hsl(223, 31%, 20%)',
-    borderWidth: 6,
+    padding: 6,
     borderRadius: 22,
     display: 'flex',
     flexDirection: 'row',
   },
+  darkToggleBackground: {
+    backgroundColor: palette.dark.background.secondary,
+  },
+  lightToggleBackground: {
+    backgroundColor: palette.light.background.secondary,
+  },
+  contrastToggleBackground: {
+    backgroundColor: palette.contrast.background.secondary,
+  },
   thumb: {
-    backgroundColor: 'hsl(6, 63%, 50%)',
     width: 16,
     height: 16,
     borderRadius: 16,
   },
-  dark: {
+  darkThumb: {
+    backgroundColor: palette.dark.keys.accentBackground,
+  },
+  lightThumb: {
+    backgroundColor: palette.light.keys.accentBackground,
+  },
+  contrastThumb: {
+    backgroundColor: palette.contrast.keys.accentBackground,
+  },
+  darkPosition: {
     justifyContent: 'flex-start',
   },
-  light: {
+  lightPosition: {
     justifyContent: 'center',
   },
-  contrast: {
+  contrastPosition: {
     justifyContent: 'flex-end',
   },
 });

@@ -6,8 +6,8 @@ export const palette = {
       screen: 'hsl(224, 36%, 15%)',
     },
     keys: {
-      primaryBackground: 'hsl(225, 21%, 49%)',
-      primaryShadow: 'hsl(224, 28%, 35%)',
+      primaryBackground: 'hsl(30, 25%, 89%)',
+      primaryShadow: 'hsl(28, 16%, 65%)',
       secondaryBackground: 'hsl(225, 21%, 49%)',
       secondaryShadow: 'hsl(224, 28%, 35%)',
       accentBackground: 'hsl(6, 63%, 50%)',
@@ -21,7 +21,7 @@ export const palette = {
   light: {
     background: {
       primary: 'hsl(0, 0%, 90%)',
-      secondary: 'hsl(0, 5%, 81%',
+      secondary: 'hsl(0, 5%, 81%)',
       screen: 'hsl(0, 0%, 93%)',
     },
     keys: {

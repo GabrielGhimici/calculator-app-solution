@@ -1,42 +1,45 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, Pressable, Alert, Text, View } from 'react-native';
+import { palette } from './styles/Palette';
+import { StateContext } from './styles/ThemeContext';
 
 export default function Key({ label, lastInLine, variant }) {
+  const { theme } = useContext(StateContext);
   const stylesForVariant = (selectedVariant) => {
     switch (selectedVariant) {
       case 'eq':
         return {
-          key: styles.red,
-          background: styles.redBackground,
-          label: styles.redLabel,
+          key: [styles.doubleKey, styles[`${theme}Accent`]],
+          background: [styles[`${theme}AccentBackground`]],
+          label: [styles[`${theme}AccentLabel`]],
         };
       case 'fnDouble':
         return {
-          key: styles.blueDouble,
-          background: styles.blueBackground,
-          label: styles.blueLabel,
+          key: [styles.doubleKey, styles[`${theme}Function`]],
+          background: [styles[`${theme}FunctionBackground`]],
+          label: [styles.smallerText, styles[`${theme}FunctionLabel`]],
         };
       case 'fn':
         return {
-          key: styles.blue,
-          background: styles.blueBackground,
-          label: styles.blueLabel,
+          key: [styles[`${theme}Function`]],
+          background: [styles[`${theme}FunctionBackground`]],
+          label: [styles.smallerText, styles[`${theme}FunctionLabel`]],
         };
       case 'dot':
       case 'op':
       case 'num':
       default:
         return {
-          key: styles.grey,
-          background: styles.greyBackground,
-          label: styles.greyLabel,
+          key: [styles[`${theme}Default`]],
+          background: [styles[`${theme}DefaultBackground`]],
+          label: [styles[`${theme}DefaultLabel`]],
         };
     }
   };
 
-  const backgroundStyles = [styles.background];
-  const keyStyles = [styles.container];
-  const labelStyles = [styles.label];
+  let backgroundStyles = [styles.background];
+  let keyStyles = [styles.container];
+  let labelStyles = [styles.label];
 
   if (lastInLine) {
     keyStyles.push(styles.noRightMargin);
@@ -47,9 +50,9 @@ export default function Key({ label, lastInLine, variant }) {
     key: sKey,
     label: sLabel,
   } = stylesForVariant(variant);
-  keyStyles.push(sKey);
-  backgroundStyles.push(sBackground);
-  labelStyles.push(sLabel);
+  keyStyles = [...keyStyles, ...sKey];
+  backgroundStyles = [...backgroundStyles, ...sBackground];
+  labelStyles = [...labelStyles, ...sLabel];
 
   return (
     <Pressable
@@ -72,6 +75,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     aspectRatio: 0.95,
     marginRight: 12,
+    overflow: 'hidden',
   },
   noRightMargin: {
     marginRight: 0,
@@ -88,37 +92,94 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 4,
   },
-  grey: {
-    backgroundColor: 'hsl(28, 16%, 65%)',
-  },
-  greyBackground: {
-    backgroundColor: 'hsl(30, 25%, 89%)',
-  },
-  greyLabel: {
-    color: 'hsl(221, 14%, 31%)',
-  },
-  red: {
-    backgroundColor: 'hsl(6, 70%, 34%)',
+  doubleKey: {
     aspectRatio: 1.95,
   },
-  redBackground: {
-    backgroundColor: 'hsl(6, 63%, 50%)',
-  },
-  redLabel: {
-    color: 'hsl(0, 0%, 100%)',
-  },
-  blue: {
-    backgroundColor: 'hsl(224, 28%, 35%)',
-  },
-  blueDouble: {
-    backgroundColor: 'hsl(224, 28%, 35%)',
-    aspectRatio: 1.95,
-  },
-  blueBackground: {
-    backgroundColor: 'hsl(225, 21%, 49%)',
-  },
-  blueLabel: {
-    color: 'hsl(0, 0%, 100%)',
+  smallerText: {
     fontSize: 18,
+  },
+
+  darkDefault: {
+    backgroundColor: palette.dark.keys.primaryShadow,
+  },
+  darkDefaultBackground: {
+    backgroundColor: palette.dark.keys.primaryBackground,
+  },
+  darkDefaultLabel: {
+    color: palette.dark.text.dark,
+  },
+  darkFunction: {
+    backgroundColor: palette.dark.keys.secondaryShadow,
+  },
+  darkFunctionBackground: {
+    backgroundColor: palette.dark.keys.secondaryBackground,
+  },
+  darkFunctionLabel: {
+    color: palette.dark.text.light,
+  },
+  darkAccent: {
+    backgroundColor: palette.dark.keys.accentShadow,
+  },
+  darkAccentBackground: {
+    backgroundColor: palette.dark.keys.accentBackground,
+  },
+  darkAccentLabel: {
+    color: palette.dark.text.light,
+  },
+
+  lightDefault: {
+    backgroundColor: palette.light.keys.primaryShadow,
+  },
+  lightDefaultBackground: {
+    backgroundColor: palette.light.keys.primaryBackground,
+  },
+  lightDefaultLabel: {
+    color: palette.light.text.dark,
+  },
+  lightFunction: {
+    backgroundColor: palette.light.keys.secondaryShadow,
+  },
+  lightFunctionBackground: {
+    backgroundColor: palette.light.keys.secondaryBackground,
+  },
+  lightFunctionLabel: {
+    color: palette.light.text.light,
+  },
+  lightAccent: {
+    backgroundColor: palette.light.keys.accentShadow,
+  },
+  lightAccentBackground: {
+    backgroundColor: palette.light.keys.accentBackground,
+  },
+  lightAccentLabel: {
+    color: palette.light.text.light,
+  },
+
+  contrastDefault: {
+    backgroundColor: palette.contrast.keys.primaryShadow,
+  },
+  contrastDefaultBackground: {
+    backgroundColor: palette.contrast.keys.primaryBackground,
+  },
+  contrastDefaultLabel: {
+    color: palette.contrast.text.accent,
+  },
+  contrastFunction: {
+    backgroundColor: palette.contrast.keys.secondaryShadow,
+  },
+  contrastFunctionBackground: {
+    backgroundColor: palette.contrast.keys.secondaryBackground,
+  },
+  contrastFunctionLabel: {
+    color: palette.contrast.text.light,
+  },
+  contrastAccent: {
+    backgroundColor: palette.contrast.keys.accentShadow,
+  },
+  contrastAccentBackground: {
+    backgroundColor: palette.contrast.keys.accentBackground,
+  },
+  contrastAccentLabel: {
+    color: palette.contrast.text.dark,
   },
 });
