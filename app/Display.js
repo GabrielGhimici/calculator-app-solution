@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet, Platform } from 'react-native';
 import numbro from 'numbro';
-import { StateContext } from './styles/ThemeContext';
+import { ThemeStateContext } from './styles/ThemeContext';
 import { palette } from './styles/Palette';
 
 export default function Display({ value }) {
-  const { theme } = useContext(StateContext);
+  const { theme } = useContext(ThemeStateContext);
   const formattedValue = numbro(value).format({ thousandSeparated: true });
   return (
     <Text style={[styles.displayText, styles[theme]]}>{formattedValue}</Text>

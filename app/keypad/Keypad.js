@@ -2,11 +2,11 @@ import React, { useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
 import Key from '../Key';
 import { keypadPattern } from './KeypadPattern';
-import { StateContext } from '../styles/ThemeContext';
+import { ThemeStateContext } from '../styles/ThemeContext';
 import { palette } from '../styles/Palette';
 
 export default function Keypad() {
-  const { theme } = useContext(StateContext);
+  const { theme } = useContext(ThemeStateContext);
   const keypadContent = keypadPattern.map((row, rowIndex) => {
     const rowStyles = [styles.keypadRow];
     if (rowIndex === keypadPattern.length - 1) {

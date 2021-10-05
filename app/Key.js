@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { StyleSheet, Pressable, Text, View, Platform } from 'react-native';
 import { palette } from './styles/Palette';
-import { StateContext } from './styles/ThemeContext';
+import { ThemeStateContext } from './styles/ThemeContext';
 
 export default function Key({ label, lastInLine, variant }) {
-  const { theme } = useContext(StateContext);
+  const { theme } = useContext(ThemeStateContext);
   const stylesForVariant = (selectedVariant) => {
     switch (selectedVariant) {
       case 'eq':

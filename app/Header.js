@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import ThemeSelector from './ThemeSelector';
-import { StateContext } from './styles/ThemeContext';
+import { ThemeStateContext } from './styles/ThemeContext';
 import { palette } from './styles/Palette';
 
 export default function Header() {
-  const { theme } = useContext(StateContext);
+  const { theme } = useContext(ThemeStateContext);
   return (
     <View style={styles.headerContainer}>
       <Text style={[styles.title, styles[`${theme}Title`]]}>calc</Text>

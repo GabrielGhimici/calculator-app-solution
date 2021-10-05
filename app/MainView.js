@@ -5,12 +5,12 @@ import { StatusBar } from 'expo-status-bar';
 import Constants from 'expo-constants';
 import Display from './Display';
 import Keypad from './keypad/Keypad';
-import { StateContext } from './styles/ThemeContext';
+import { ThemeStateContext } from './styles/ThemeContext';
 import { palette } from './styles/Palette';
 import { Platform } from 'react-native';
 
 export default function MainView() {
-  const { theme } = useContext(StateContext);
+  const { theme } = useContext(ThemeStateContext);
   const statusBarBackground = palette[theme].background.primary;
   const view = Platform.select({
     web: (

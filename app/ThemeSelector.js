@@ -1,15 +1,15 @@
 import React, { useState, useContext } from 'react';
-import { View, StyleSheet, Text, Pressable } from 'react-native';
+import { View, StyleSheet, Text, Pressable, Platform } from 'react-native';
 import {
-  StateContext,
-  DispatchContext,
+  ThemeStateContext,
+  ThemeDispatchContext,
   updateTheme,
 } from './styles/ThemeContext';
 import { palette } from './styles/Palette';
 
 export default function ThemeSelector() {
-  const { theme } = useContext(StateContext);
-  const dispatch = useContext(DispatchContext);
+  const { theme } = useContext(ThemeStateContext);
+  const dispatch = useContext(ThemeDispatchContext);
   const availableThemes = ['dark', 'light', 'contrast'];
   const [increment, setIncrement] = useState(1);
 
@@ -69,6 +69,12 @@ const styles = StyleSheet.create({
   selector: {
     display: 'flex',
     flexDirection: 'column',
+    ...Platform.select({
+      web: {
+        cursor: 'pointer',
+        userSelect: 'none',
+      },
+    }),
   },
   themeLabels: {
     display: 'flex',

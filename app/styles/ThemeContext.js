@@ -1,7 +1,7 @@
 import React, { createContext, useReducer } from 'react';
 
-export const DispatchContext = createContext();
-export const StateContext = createContext();
+export const ThemeDispatchContext = createContext();
+export const ThemeStateContext = createContext();
 
 const Actions = {
   UPDATE_THEME: 'UPDATE_THEME',
@@ -30,10 +30,10 @@ const reducer = (state, action) => {
 export default function ThemeProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
   return (
-    <StateContext.Provider value={state}>
-      <DispatchContext.Provider value={dispatch}>
+    <ThemeStateContext.Provider value={state}>
+      <ThemeDispatchContext.Provider value={dispatch}>
         {children}
-      </DispatchContext.Provider>
-    </StateContext.Provider>
+      </ThemeDispatchContext.Provider>
+    </ThemeStateContext.Provider>
   );
 }
