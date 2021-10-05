@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { StyleSheet, Pressable, Alert, Text, View } from 'react-native';
+import { StyleSheet, Pressable, Text, View, Platform } from 'react-native';
 import { palette } from './styles/Palette';
 import { StateContext } from './styles/ThemeContext';
 
@@ -50,31 +50,59 @@ export default function Key({ label, lastInLine, variant }) {
     key: sKey,
     label: sLabel,
   } = stylesForVariant(variant);
-  keyStyles = [...keyStyles, ...sKey];
+  keyStyles = Platform.select({
+    web: [...keyStyles, ...sKey, ...sBackground],
+    default: [...keyStyles, ...sKey],
+  });
   backgroundStyles = [...backgroundStyles, ...sBackground];
   labelStyles = [...labelStyles, ...sLabel];
+
+  const content = Platform.select({
+    web: <Text style={labelStyles}>{label}</Text>,
+    default: (
+      <View style={backgroundStyles}>
+        <Text style={labelStyles}>{label}</Text>
+      </View>
+    ),
+  });
 
   return (
     <Pressable
       android_disableSound={true}
       style={keyStyles}
-      onPress={() => Alert.alert(`${label} key pressed`)}
+      onPress={() => console.log(`${label} key pressed`)}
     >
-      <View style={backgroundStyles} />
-      <Text style={labelStyles}>{label}</Text>
+      {content}
     </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 4,
-    aspectRatio: 0.95,
-    marginRight: 12,
+    ...Platform.select({
+      web: {
+        width: 'calc(25% - 18px)',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginRight: 24,
+        paddingTop: 12,
+        paddingBottom: 6,
+        shadowOffset: {
+          width: 0,
+          height: 4,
+        },
+        borderRadius: 8,
+        cursor: 'pointer',
+        userSelect: 'none',
+      },
+      default: {
+        flex: 1,
+        aspectRatio: 0.95,
+        marginRight: 12,
+        borderRadius: 4,
+      },
+    }),
     overflow: 'hidden',
   },
   noRightMargin: {
@@ -83,7 +111,6 @@ const styles = StyleSheet.create({
   label: {
     fontFamily: 'Spartan_700Bold',
     fontSize: 32,
-    marginBottom: 4,
   },
   background: {
     width: '100%',
@@ -91,16 +118,33 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     position: 'absolute',
     bottom: 4,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   doubleKey: {
-    aspectRatio: 1.95,
+    ...Platform.select({
+      web: {
+        width: 'calc(50% - 12px)',
+      },
+      default: {
+        aspectRatio: 1.95,
+      },
+    }),
   },
   smallerText: {
     fontSize: 18,
   },
 
   darkDefault: {
-    backgroundColor: palette.dark.keys.primaryShadow,
+    ...Platform.select({
+      web: {
+        shadowColor: palette.dark.keys.primaryShadow,
+      },
+      default: {
+        backgroundColor: palette.dark.keys.primaryShadow,
+      },
+    }),
   },
   darkDefaultBackground: {
     backgroundColor: palette.dark.keys.primaryBackground,
@@ -109,7 +153,14 @@ const styles = StyleSheet.create({
     color: palette.dark.text.dark,
   },
   darkFunction: {
-    backgroundColor: palette.dark.keys.secondaryShadow,
+    ...Platform.select({
+      web: {
+        shadowColor: palette.dark.keys.secondaryShadow,
+      },
+      default: {
+        backgroundColor: palette.dark.keys.secondaryShadow,
+      },
+    }),
   },
   darkFunctionBackground: {
     backgroundColor: palette.dark.keys.secondaryBackground,
@@ -118,7 +169,14 @@ const styles = StyleSheet.create({
     color: palette.dark.text.light,
   },
   darkAccent: {
-    backgroundColor: palette.dark.keys.accentShadow,
+    ...Platform.select({
+      web: {
+        shadowColor: palette.dark.keys.accentShadow,
+      },
+      default: {
+        backgroundColor: palette.dark.keys.accentShadow,
+      },
+    }),
   },
   darkAccentBackground: {
     backgroundColor: palette.dark.keys.accentBackground,
@@ -128,7 +186,14 @@ const styles = StyleSheet.create({
   },
 
   lightDefault: {
-    backgroundColor: palette.light.keys.primaryShadow,
+    ...Platform.select({
+      web: {
+        shadowColor: palette.light.keys.primaryShadow,
+      },
+      default: {
+        backgroundColor: palette.light.keys.primaryShadow,
+      },
+    }),
   },
   lightDefaultBackground: {
     backgroundColor: palette.light.keys.primaryBackground,
@@ -137,7 +202,14 @@ const styles = StyleSheet.create({
     color: palette.light.text.dark,
   },
   lightFunction: {
-    backgroundColor: palette.light.keys.secondaryShadow,
+    ...Platform.select({
+      web: {
+        shadowColor: palette.light.keys.secondaryShadow,
+      },
+      default: {
+        backgroundColor: palette.light.keys.secondaryShadow,
+      },
+    }),
   },
   lightFunctionBackground: {
     backgroundColor: palette.light.keys.secondaryBackground,
@@ -146,7 +218,14 @@ const styles = StyleSheet.create({
     color: palette.light.text.light,
   },
   lightAccent: {
-    backgroundColor: palette.light.keys.accentShadow,
+    ...Platform.select({
+      web: {
+        shadowColor: palette.light.keys.accentShadow,
+      },
+      default: {
+        backgroundColor: palette.light.keys.accentShadow,
+      },
+    }),
   },
   lightAccentBackground: {
     backgroundColor: palette.light.keys.accentBackground,
@@ -156,7 +235,14 @@ const styles = StyleSheet.create({
   },
 
   contrastDefault: {
-    backgroundColor: palette.contrast.keys.primaryShadow,
+    ...Platform.select({
+      web: {
+        shadowColor: palette.contrast.keys.primaryShadow,
+      },
+      default: {
+        backgroundColor: palette.contrast.keys.primaryShadow,
+      },
+    }),
   },
   contrastDefaultBackground: {
     backgroundColor: palette.contrast.keys.primaryBackground,
@@ -165,7 +251,14 @@ const styles = StyleSheet.create({
     color: palette.contrast.text.accent,
   },
   contrastFunction: {
-    backgroundColor: palette.contrast.keys.secondaryShadow,
+    ...Platform.select({
+      web: {
+        shadowColor: palette.contrast.keys.secondaryShadow,
+      },
+      default: {
+        backgroundColor: palette.contrast.keys.secondaryShadow,
+      },
+    }),
   },
   contrastFunctionBackground: {
     backgroundColor: palette.contrast.keys.secondaryBackground,
@@ -174,7 +267,14 @@ const styles = StyleSheet.create({
     color: palette.contrast.text.light,
   },
   contrastAccent: {
-    backgroundColor: palette.contrast.keys.accentShadow,
+    ...Platform.select({
+      web: {
+        shadowColor: palette.contrast.keys.accentShadow,
+      },
+      default: {
+        backgroundColor: palette.contrast.keys.accentShadow,
+      },
+    }),
   },
   contrastAccentBackground: {
     backgroundColor: palette.contrast.keys.accentBackground,

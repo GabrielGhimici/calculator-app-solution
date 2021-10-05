@@ -13,7 +13,7 @@ export default function App() {
   } else {
     return (
       <ThemeProvider>
-        <MainView/>
+        <MainView />
       </ThemeProvider>
     );
   }
