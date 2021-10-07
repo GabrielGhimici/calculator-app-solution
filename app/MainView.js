@@ -32,9 +32,24 @@ export default function MainView() {
       </SafeAreaView>
     ),
   });
+  const statusBarByTheme = () => {
+    switch (theme) {
+      case 'light':
+        return 'dark';
+      case 'dark':
+      case 'contrast':
+        return 'light';
+      default:
+        return 'auto';
+    }
+  };
+
   return (
     <>
-      <StatusBar backgroundColor={statusBarBackground} />
+      <StatusBar
+        backgroundColor={statusBarBackground}
+        style={statusBarByTheme()}
+      />
       {view}
     </>
   );
