@@ -2,9 +2,19 @@ import React, { useContext } from 'react';
 import { StyleSheet, Pressable, Text, View, Platform } from 'react-native';
 import { palette } from './styles/Palette';
 import { ThemeStateContext } from './styles/ThemeContext';
+import { MainDispatchContext } from './core/StateContext';
+import {
+  resetKeyPress,
+  numericKeyPress,
+  deleteKeyPress,
+  operationKeyPress,
+  eqKeyPress,
+  dotKeyPress,
+} from './core/StateActions';
 
-export default function Key({ label, lastInLine, variant }) {
+export default function Key({ label, lastInLine, variant, value }) {
   const { theme } = useContext(ThemeStateContext);
+  const dispatch = useContext(MainDispatchContext);
   const stylesForVariant = (selectedVariant) => {
     switch (selectedVariant) {
       case 'eq':
@@ -66,11 +76,34 @@ export default function Key({ label, lastInLine, variant }) {
     ),
   });
 
+  const selectAction = () => {
+    switch (variant) {
+      case 'num':
+        return numericKeyPress(value);
+      case 'fnDouble':
+        return resetKeyPress();
+      case 'fn':
+        return deleteKeyPress();
+      case 'op':
+        return operationKeyPress(value);
+      case 'eq':
+        return eqKeyPress();
+      case 'dot':
+        return dotKeyPress();
+      default:
+        return {
+          type: 'UNKNOWN',
+        };
+    }
+  };
+
   return (
     <Pressable
       android_disableSound={true}
       style={keyStyles}
-      onPress={() => console.log(`${label} key pressed`)}
+      onPress={() => {
+        dispatch(selectAction());
+      }}
     >
       {content}
     </Pressable>

@@ -3,6 +3,7 @@ import AppLoading from 'expo-app-loading';
 import { useFonts, Spartan_700Bold } from '@expo-google-fonts/spartan';
 import ThemeProvider from './app/styles/ThemeContext';
 import MainView from './app/MainView';
+import StateProvider from './app/core/StateContext';
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -13,7 +14,9 @@ export default function App() {
   } else {
     return (
       <ThemeProvider>
-        <MainView />
+        <StateProvider>
+          <MainView />
+        </StateProvider>
       </ThemeProvider>
     );
   }

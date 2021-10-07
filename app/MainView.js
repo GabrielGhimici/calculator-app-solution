@@ -26,7 +26,7 @@ export default function MainView() {
       <SafeAreaView style={styles.safeAreaView}>
         <ScrollView style={[styles.container, styles[theme]]}>
           <Header />
-          <Display value={1000000.542} />
+          <Display />
           <Keypad />
         </ScrollView>
       </SafeAreaView>

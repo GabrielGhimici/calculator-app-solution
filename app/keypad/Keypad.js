@@ -19,6 +19,7 @@ export default function Keypad() {
           key={`${keyIndex} - ${key.label}`}
           label={key.label}
           variant={key.variant}
+          value={key.value}
           lastInLine={isLastInLine}
         />
       );
