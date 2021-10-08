@@ -1,7 +1,7 @@
 {
   "files": {
-    "app.js": "/calculator-app-solution/static/js/app.fc552cfb.chunk.js",
-    "app.js.map": "/calculator-app-solution/static/js/app.fc552cfb.chunk.js.map",
+    "app.js": "/calculator-app-solution/static/js/app.e2a6e5ab.chunk.js",
+    "app.js.map": "/calculator-app-solution/static/js/app.e2a6e5ab.chunk.js.map",
     "runtime~app.js": "/calculator-app-solution/static/js/runtime~app.68dbdf96.js",
     "runtime~app.js.map": "/calculator-app-solution/static/js/runtime~app.68dbdf96.js.map",
     "static/js/2.ba39e51b.chunk.js": "/calculator-app-solution/static/js/2.ba39e51b.chunk.js",
@@ -17,6 +17,6 @@
   "entrypoints": [
     "static/js/runtime~app.68dbdf96.js",
     "static/js/2.ba39e51b.chunk.js",
-    "static/js/app.fc552cfb.chunk.js"
+    "static/js/app.e2a6e5ab.chunk.js"
   ]
 }
