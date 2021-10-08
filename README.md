@@ -24,7 +24,7 @@ Users should be able to:
 ### Links
 
 - Live Desktop Site URL: [https://gabrielghimici.github.io/calculator-app-solution/](https://gabrielghimici.github.io/calculator-app-solution/)
-- Live Mobile App URL - accesible only with [Expo Go](https://expo.dev/client): [https://expo.dev/@gabriel.ghimici/calculator-app](https://expo.dev/@gabriel.ghimici/calculator-app)
+- Live Mobile App URL - accesible [Android only](https://docs.expo.dev/workflow/publishing/#on-ios-you-cant-share-your-published) with [Expo Go](https://expo.dev/client): [https://expo.dev/@gabriel.ghimici/calculator-app](https://expo.dev/@gabriel.ghimici/calculator-app)
 
 ## My process
 
