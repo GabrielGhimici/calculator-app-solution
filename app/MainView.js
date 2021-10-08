@@ -1,16 +1,31 @@
-import React, { cloneElement, useContext } from 'react';
-import { StyleSheet, SafeAreaView, ScrollView, View } from 'react-native';
+import React, { useContext, useEffect } from 'react';
+import {
+  StyleSheet,
+  SafeAreaView,
+  ScrollView,
+  View,
+  Platform,
+  useColorScheme,
+} from 'react-native';
 import Header from './Header';
 import { StatusBar } from 'expo-status-bar';
 import Constants from 'expo-constants';
 import Display from './Display';
 import Keypad from './keypad/Keypad';
-import { ThemeStateContext } from './styles/ThemeContext';
+import {
+  ThemeDispatchContext,
+  ThemeStateContext,
+  updateTheme,
+} from './styles/ThemeContext';
 import { palette } from './styles/Palette';
-import { Platform } from 'react-native';
 
 export default function MainView() {
+  const colorScheme = useColorScheme();
   const { theme } = useContext(ThemeStateContext);
+  const dispatch = useContext(ThemeDispatchContext);
+  useEffect(() => {
+    dispatch(updateTheme(colorScheme || 'light'));
+  }, [colorScheme]);
   const statusBarBackground = palette[theme].background.primary;
   const view = Platform.select({
     web: (

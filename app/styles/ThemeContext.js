@@ -13,7 +13,7 @@ export const updateTheme = (themeValue) => ({
 });
 
 const initialState = {
-  theme: 'dark',
+  theme: 'light',
 };
 
 const reducer = (state, action) => {
