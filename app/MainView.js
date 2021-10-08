@@ -24,7 +24,7 @@ export default function MainView() {
   const { theme } = useContext(ThemeStateContext);
   const dispatch = useContext(ThemeDispatchContext);
   useEffect(() => {
-    dispatch(updateTheme(colorScheme || 'light'));
+    dispatch(updateTheme(colorScheme || 'dark'));
   }, [colorScheme]);
   const statusBarBackground = palette[theme].background.primary;
   const view = Platform.select({
