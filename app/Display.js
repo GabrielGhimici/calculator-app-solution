@@ -10,7 +10,7 @@ export default function Display() {
   const { display } = useContext(MainStateContext);
 
   let formattedValue = '';
-  if (display !== 'Err') {
+  if (display !== 'Err' && display !== 'Infinity') {
     const numericValue = Number(display);
     let decimalPatternRoot = '0';
     const maxDecimalPatternLength = 10;

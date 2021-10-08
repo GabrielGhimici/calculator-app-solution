@@ -11,7 +11,7 @@ export const stateReducer = (state, action) => {
   switch (action.type) {
     case StateActions.NUMERIC_KEY_PRESS: {
       let newDisplay = state.display;
-      if (newDisplay === '0' || newDisplay === '') {
+      if (['', '0', 'Err', 'Infinity'].indexOf(state.display) !== -1) {
         newDisplay = `${action.payload}`;
       } else {
         newDisplay = `${state.display}${action.payload}`;
@@ -22,9 +22,15 @@ export const stateReducer = (state, action) => {
       return initialState;
     }
     case StateActions.DELETE_KEY_PRESS: {
+      let newDisplay = state.display;
+      if (state.display === 'Err' || state.display === 'Infinity') {
+        newDisplay = '';
+      } else {
+        newDisplay = state.display.substring(0, state.display.length - 1);
+      }
       return {
         ...state,
-        ...{ display: state.display.substring(0, state.display.length - 1) },
+        ...{ display: newDisplay },
       };
     }
     case StateActions.OPERATION_KEY_PRESS: {
@@ -105,5 +111,8 @@ const multiply = (first, second) => {
 };
 
 const divide = (first, second) => {
+  if (second === 0) {
+    return 'Infinity';
+  }
   return `${numeral(first).divide(second).value()}`;
 };
