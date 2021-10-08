@@ -1,22 +1,22 @@
 {
   "files": {
-    "app.js": "/calculator-app-solution/static/js/app.160db44c.chunk.js",
-    "app.js.map": "/calculator-app-solution/static/js/app.160db44c.chunk.js.map",
+    "app.js": "/calculator-app-solution/static/js/app.75110e1c.chunk.js",
+    "app.js.map": "/calculator-app-solution/static/js/app.75110e1c.chunk.js.map",
     "runtime~app.js": "/calculator-app-solution/static/js/runtime~app.68dbdf96.js",
     "runtime~app.js.map": "/calculator-app-solution/static/js/runtime~app.68dbdf96.js.map",
-    "static/js/2.a077c0da.chunk.js": "/calculator-app-solution/static/js/2.a077c0da.chunk.js",
-    "static/js/2.a077c0da.chunk.js.map": "/calculator-app-solution/static/js/2.a077c0da.chunk.js.map",
+    "static/js/2.ba39e51b.chunk.js": "/calculator-app-solution/static/js/2.ba39e51b.chunk.js",
+    "static/js/2.ba39e51b.chunk.js.map": "/calculator-app-solution/static/js/2.ba39e51b.chunk.js.map",
     "favicon-16.png": "/calculator-app-solution/favicon-16.png",
     "favicon-32.png": "/calculator-app-solution/favicon-32.png",
     "favicon.ico": "/calculator-app-solution/favicon.ico",
     "index.html": "/calculator-app-solution/index.html",
     "manifest.json": "/calculator-app-solution/manifest.json",
     "serve.json": "/calculator-app-solution/serve.json",
-    "static/js/2.a077c0da.chunk.js.LICENSE.txt": "/calculator-app-solution/static/js/2.a077c0da.chunk.js.LICENSE.txt"
+    "static/js/2.ba39e51b.chunk.js.LICENSE.txt": "/calculator-app-solution/static/js/2.ba39e51b.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime~app.68dbdf96.js",
-    "static/js/2.a077c0da.chunk.js",
-    "static/js/app.160db44c.chunk.js"
+    "static/js/2.ba39e51b.chunk.js",
+    "static/js/app.75110e1c.chunk.js"
   ]
 }
